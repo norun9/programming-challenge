@@ -9,6 +9,25 @@ import (
 	"strings"
 )
 
+func insertionSort2(arrOrig []int, N int) []int {
+	A := make([]int, N)
+	copy(A, arrOrig)
+	for i := 1; i < N; i++ {
+		x := A[i]
+		j := i - 1
+		for ; j >= 0 && A[j] > x; j-- {
+			// 値を後ろにずらしていく
+			A[j+1] = A[j]
+		}
+		// 重複していても最後に重複しあたところに値が入るから大丈夫
+		A[j+1] = x
+		fmt.Println(i, "finit")
+		fmt.Println(A)
+		fmt.Println("===")
+	}
+	return A
+}
+
 func insertionSort(arrOrig []string, N int) []string {
 	n := len(arrOrig)
 
@@ -65,7 +84,7 @@ func selectionSort(arrOrig []string, N int) []string {
 	return A
 }
 
-func printStableorNot(arr1, arr2 []string) {
+func printStableOrNot(arr1, arr2 []string) {
 	if reflect.DeepEqual(arr1, arr2) {
 		fmt.Println("Stable")
 	} else {
@@ -83,8 +102,8 @@ func main() {
 
 	result1 := bubbleSort(input, n)
 	fmt.Println(strings.Trim(fmt.Sprintf("%v", result1), "[]"))
-	printStableorNot(base, result1)
+	printStableOrNot(base, result1)
 	result2 := selectionSort(input, n)
 	fmt.Println(strings.Trim(fmt.Sprintf("%v", result2), "[]"))
-	printStableorNot(base, result2)
+	printStableOrNot(base, result2)
 }
