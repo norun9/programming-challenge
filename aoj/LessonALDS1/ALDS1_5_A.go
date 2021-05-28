@@ -46,6 +46,8 @@ func bit() {
 		for i := uint(0); i < n; i++ {
 			fmt.Printf("index: %d\n", i)
 			fmt.Printf("(1<<i): %05b\n", (1 << i))
+			// 一つずつビットを左にずらしていく(2のn乗)
+			// 例えば4回ループが回るなら[00001, 00010, 00100, 01000, 10000]となっていく
 			if bit&(1<<i) != 0 {
 				fmt.Printf("AND演算子で引っかかった: %d\n", A[i])
 				current += A[i]
