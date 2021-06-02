@@ -15,7 +15,6 @@ func nextLine() string {
 	return sc.Text()
 }
 
-
 // 素数判定:
 // 調査した値の倍数は全て除去する → その数の倍数はその数で割り切れる為、合成数となる
 func isPrime(x int) bool {
