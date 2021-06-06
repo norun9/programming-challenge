@@ -40,7 +40,7 @@ func find(A []int, tcd int) int {
 	return I
 }
 
-func irohatyan() {
+func main() {
 	fp := os.Stdin
 	if len(os.Args) > 1 {
 		fp, _ = os.Open(os.Args[1])

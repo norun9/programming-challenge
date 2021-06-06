@@ -39,7 +39,7 @@ func getStrList(scanner *bufio.Reader) []string {
 	return strings.Split(getNextLine(scanner), "")
 }
 
-func issyo() {
+func main() {
 	fp := os.Stdin
 	if len(os.Args) > 1 {
 		fp, _ = os.Open(os.Args[1])

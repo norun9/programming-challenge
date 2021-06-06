@@ -34,7 +34,7 @@ func MergeSort(s []int) []int {
 	return result
 }
 
-func mergeSort() {
+func main() {
 	// Your code here!
 	fmt.Println(MergeSort([]int{2, 1, 6, 5, 3, 8, 1}))
 }

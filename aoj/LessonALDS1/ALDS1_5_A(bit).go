@@ -15,7 +15,7 @@ func Int() uint {
 	return uint(i)
 }
 
-func bit() {
+func main() {
 	sc.Split(bufio.ScanWords)
 
 	var n = Int()

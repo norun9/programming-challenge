@@ -48,7 +48,7 @@ func binSearch(A []int, tcd int) bool {
 	return false
 }
 
-func mainA() {
+func main() {
 	// Your code here!
 	fp := os.Stdin
 	if len(os.Args) > 1 {

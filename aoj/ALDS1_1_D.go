@@ -8,7 +8,7 @@ import (
 	"strconv"
 )
 
-func maxProfit() {
+func main() {
 	var n, r, min int
 	// 最大の利益が負になることを考慮して、初期値は 10^9×(−1)以下に設定
 	// -2147483648

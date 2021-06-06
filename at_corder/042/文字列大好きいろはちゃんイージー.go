@@ -36,7 +36,7 @@ func getStrList(scanner *bufio.Reader) []string {
 	return list
 }
 
-func daisuki() {
+func main() {
 	fp := os.Stdin
 	if len(os.Args) > 1 {
 		fp, _ = os.Open(os.Args[1])

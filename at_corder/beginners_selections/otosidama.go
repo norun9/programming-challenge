@@ -30,7 +30,7 @@ func getIntList(scanner *bufio.Reader) []int {
 	return result
 }
 
-func otosidama() {
+func main() {
 	fp := os.Stdin
 	if len(os.Args) > 1 {
 		fp, _ = os.Open(os.Args[1])
