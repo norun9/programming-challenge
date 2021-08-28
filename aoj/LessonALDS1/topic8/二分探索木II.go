@@ -1,4 +1,4 @@
-package LessonALDS1
+package topic8
 
 import (
 	"bufio"
@@ -55,15 +55,11 @@ type Element struct {
 	key    int
 }
 
-type BinarySearchTree struct {
+type SearchBinaryTree struct {
 	root *Element
 }
 
-func NewBinarySearchTree() *BinarySearchTree {
-	return new(BinarySearchTree)
-}
-
-func (t *BinarySearchTree) insert(key int) {
+func (t *SearchBinaryTree) insert(key int) {
 	element := &Element{
 		left:  nil,
 		right: nil,
@@ -72,7 +68,7 @@ func (t *BinarySearchTree) insert(key int) {
 
 	var y *Element
 	x := t.root
-	fmt.Println("現在のキー:", key)
+	//fmt.Println("現在のキー:", key)
 	// 調査対象を深めていく
 	for x != nil {
 		y = x
@@ -83,12 +79,12 @@ func (t *BinarySearchTree) insert(key int) {
 		} else {
 			x = x.right
 		}
-		fmt.Println("今の親:", y.key)
+		//fmt.Println("今の親:", y.key)
 	}
 	if y != nil {
-		fmt.Println("最終の親:", y.key)
+		//fmt.Println("最終の親:", y.key)
 	}
-	fmt.Println("*******************")
+	//fmt.Println("*******************")
 
 	// 最終の親を現在のキーが入っているElementのparentフィールドに格納
 	element.parent = y
@@ -105,23 +101,45 @@ func (t *BinarySearchTree) insert(key int) {
 	}
 }
 
-func (t *BinarySearchTree) preorderTreeWalk(p *Element) {
-	if p == nil {
-		return
+func (t *SearchBinaryTree) find(k int, elem *Element) string {
+	if elem == nil {
+		return "no"
 	}
-	fmt.Printf(" %d", p.key)
-	t.preorderTreeWalk(p.left)
-	t.preorderTreeWalk(p.right)
+
+	if elem.key == k {
+		return "yes"
+	}
+
+	var exist string
+	if k > elem.key {
+		exist = t.find(k, elem.right)
+	} else if k < elem.key {
+		exist = t.find(k, elem.left)
+	}
+
+	return exist
 }
 
-func (t *BinarySearchTree) inorderTreeWalk(p *Element) {
-	if p == nil {
+func (t *SearchBinaryTree) preorder(elem *Element) {
+	if elem == nil {
 		return
 	}
+	fmt.Printf(" %d", elem.key)
+	t.preorder(elem.left)
+	t.preorder(elem.right)
+}
 
-	t.inorderTreeWalk(p.left)
-	fmt.Printf(" %d", p.key)
-	t.inorderTreeWalk(p.right)
+func (t *SearchBinaryTree) inorder(elem *Element) {
+	if elem == nil {
+		return
+	}
+	t.inorder(elem.left)
+	fmt.Printf(" %d", elem.key)
+	t.inorder(elem.right)
+}
+
+func NewSearchBinaryTree() *SearchBinaryTree {
+	return new(SearchBinaryTree)
 }
 
 func main() {
@@ -134,32 +152,30 @@ func main() {
 
 	var n int
 	fmt.Sscan(getNextLine(scanner), &n)
-	writer.Flush()
 
-	bstree := NewBinarySearchTree()
+	t := NewSearchBinaryTree()
 	for i := 0; i < n; i++ {
 		var A []string
 		A = getStringList(scanner)
-		cmd := A[0]
-		if cmd == "insert" {
-			k, _ := strconv.Atoi(A[1])
-			bstree.insert(k)
-		}
-		if cmd == "print" {
-			bstree.inorderTreeWalk(bstree.root)
-			fmt.Print("\n")
-			bstree.preorderTreeWalk(bstree.root)
-			fmt.Print("\n")
+		if len(A) == 2 {
+			cmd := A[0]
+			key, _ := strconv.Atoi(A[1])
+
+			switch cmd {
+			case "insert":
+				t.insert(key)
+			case "find":
+				fmt.Println(t.find(key, t.root))
+			}
+		} else {
+			cmd := A[0]
+			if cmd == "print" {
+				t.inorder(t.root)
+				fmt.Print("\n")
+				t.preorder(t.root)
+				fmt.Print("\n")
+			}
 		}
 	}
-
-	// inorderが呼ばれる順番
-	// 再帰関数
-	//fmt.Println(bstree.root.left.left.key)
-	//fmt.Println(bstree.root.left.key)
-	//fmt.Println(bstree.root.left.right.left.key)
-	//fmt.Println(bstree.root.left.right.key)
-	//fmt.Println(bstree.root.left.right.right.key)
-	//fmt.Println(bstree.root.key)
-	//fmt.Println(bstree.root.right.key)
+	writer.Flush()
 }

@@ -1,4 +1,4 @@
-package LessonALDS1
+package topic4
 
 import (
 	"bufio"

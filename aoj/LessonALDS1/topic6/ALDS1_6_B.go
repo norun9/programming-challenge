@@ -1,4 +1,4 @@
-package main
+package topic6
 
 import (
 	"bufio"

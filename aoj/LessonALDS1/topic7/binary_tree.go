@@ -1,4 +1,4 @@
-package LessonALDS1
+package topic7
 
 import (
 	"bufio"
@@ -117,7 +117,6 @@ func setDepth(trees []Tree, depth []int, i int, d int) {
 	if trees[i].left != -1 {
 		fmt.Println("left:", trees[i].left)
 		// leftを深さ探索するとp(深さ)は+1
-		// なぜ?
 		setDepth(trees, depth, trees[i].left, d+1)
 	}
 }

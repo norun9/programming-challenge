@@ -1,4 +1,4 @@
-package LessonALDS1
+package topic2
 
 import (
 	"bufio"
@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func bubbleSort() {
+func selectionSort() {
 	sc := bufio.NewScanner(os.Stdin)
 	sc.Scan()
 	n, _ := strconv.Atoi(sc.Text())
@@ -20,15 +20,16 @@ func bubbleSort() {
 		ints = append(ints, i)
 	}
 	var count int
-	flag := true
-	for flag {
-		flag = false
-		for i := n - 1; 0 < i; i-- {
-			if ints[i] < ints[i-1] {
-				ints[i], ints[i-1] = ints[i-1], ints[i]
-				count++
-				flag = true
+	for i := 0; i < n; i++ {
+		min := i
+		for j := i + 1; j < n; j++ {
+			if ints[min] > ints[j] {
+				min = j
 			}
+		}
+		if min != i {
+			count++
+			ints[i], ints[min] = ints[min], ints[i]
 		}
 	}
 	fmt.Println(strings.Trim(fmt.Sprintf("%v", ints), "[]"))

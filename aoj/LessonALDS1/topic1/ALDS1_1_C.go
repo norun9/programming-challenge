@@ -1,4 +1,4 @@
-package aoj
+package topic1
 
 import (
 	"bufio"
