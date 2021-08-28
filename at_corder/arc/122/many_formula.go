@@ -1,6 +1,4 @@
-// AC 6/11
-
-package main
+package _22
 
 import (
 	"bufio"
@@ -37,6 +35,7 @@ func getIntList(scanner *bufio.Reader) []int {
 	return result
 }
 
+// AC 6/11
 func main() {
 	fp := os.Stdin
 	if len(os.Args) > 1 {

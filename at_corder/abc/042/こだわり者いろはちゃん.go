@@ -1,4 +1,4 @@
-package main
+package _42
 
 import (
 	"bufio"
@@ -30,14 +30,31 @@ func getIntList(scanner *bufio.Reader) []int {
 	return result
 }
 
-func find(A []int, tcd int) int {
-	I := -1
-	for i, a := range A {
-		if a == tcd {
-			I = i
+func splitStr(A int) []string {
+	return strings.Split(strconv.Itoa(A), "")
+}
+
+func isValid(n int, T []int) bool {
+	l := len(strconv.Itoa(n))
+	isValid := true
+	for i := 0; i < l; i++ {
+		// 1001なら1になる
+		// 100なら0
+		// 1004なら4
+		tcd := n % 10
+		// 1001なら次のループでは100
+		n /= 10
+		for _, t := range T {
+			if t == tcd {
+				isValid = false
+				break
+			}
+		}
+		if !isValid {
+			break
 		}
 	}
-	return I
+	return isValid
 }
 
 func main() {
@@ -48,24 +65,16 @@ func main() {
 	scanner := bufio.NewReader(fp)
 	writer := bufio.NewWriter(os.Stdout)
 
-	var T []int
+	var T, A []int
 	T = getIntList(scanner)
-	list := []int{5, 7, 5}
-	l := len(list)
-	count := 0
-	for _, t := range T {
-		result := find(list, t)
-		if result == -1 {
-			break
-		} else {
-			list = append(list[:result], list[result+1:]...)
-			count++
+	price := T[0]
+	A = getIntList(scanner)
+
+	for i := price; i < price*10; i++ {
+		if isValid(i, A) {
+			fmt.Println(i)
+			return
 		}
-	}
-	if count == l {
-		fmt.Println("YES")
-	} else {
-		fmt.Println("NO")
 	}
 	writer.Flush()
 }

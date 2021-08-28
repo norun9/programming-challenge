@@ -1,4 +1,4 @@
-package at_coder
+package _44
 
 import (
 	"bufio"
@@ -30,27 +30,38 @@ func getIntList(scanner *bufio.Reader) []int {
 	return result
 }
 
+type CountNum struct {
+	Str string
+	Num int
+}
+
 func main() {
-	// Your code here!
 	fp := os.Stdin
 	if len(os.Args) > 1 {
 		fp, _ = os.Open(os.Args[1])
 	}
 	scanner := bufio.NewReader(fp)
 	writer := bufio.NewWriter(os.Stdout)
-	var n, k int
-	fmt.Sscan(getNextLine(scanner), &n)
-	fmt.Sscan(getNextLine(scanner), &k)
-	now := 1
-	for i := 0; i < n; i++ {
-		addTmp := now + k
-		mulTmp := now * 2
-		if addTmp <= mulTmp {
-			now += addTmp
+
+	var w string
+	fmt.Sscan(getNextLine(scanner), &w)
+	list := strings.Split(w, "")
+	m := map[string]int{}
+	for _, l := range list {
+		_, ok := m[l]
+		if ok {
+			m[l] += 1
 		} else {
-			now += mulTmp
+			m[l] = 1
 		}
 	}
-	fmt.Println(now)
+
+	for _, value := range m {
+		if value%2 != 0 {
+			fmt.Println("No")
+			return
+		}
+	}
+	fmt.Println("Yes")
 	writer.Flush()
 }

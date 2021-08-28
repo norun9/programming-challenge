@@ -1,4 +1,4 @@
-package main
+package at_coder
 
 import (
 	"bufio"

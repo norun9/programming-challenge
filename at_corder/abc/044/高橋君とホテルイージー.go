@@ -1,4 +1,4 @@
-package main
+package _44
 
 import (
 	"bufio"
@@ -6,7 +6,6 @@ import (
 	"os"
 	"strconv"
 	"strings"
-	// 	"math"
 )
 
 func getNextLine(scanner *bufio.Reader) string {
@@ -38,28 +37,21 @@ func main() {
 	}
 	scanner := bufio.NewReader(fp)
 	writer := bufio.NewWriter(os.Stdout)
-	var A []int
-	A = getIntList(scanner)
-	// 	N := A[0]
-	Y := A[1]
-	var man, gosen, sen int
-	for Y != 0 {
-		if Y > 10000 {
-			man += Y / 10000
-			Y -= 10000 * man
-		}
-		if Y > 5000 {
-			gosen += Y / 5000
-			Y -= 5000 * gosen
-		}
-		if Y > 1000 {
-			sen += Y / 1000
-			Y -= 1000 * sen
+
+	var N, K, X, Y int
+	fmt.Sscan(getNextLine(scanner), &N)
+	fmt.Sscan(getNextLine(scanner), &K)
+	fmt.Sscan(getNextLine(scanner), &X)
+	fmt.Sscan(getNextLine(scanner), &Y)
+
+	var sum int
+	for i := 1; i <= N; i++ {
+		if i <= K {
+			sum += X
 		} else {
-			fmt.Println("can't")
-			break
+			sum += Y
 		}
 	}
-	fmt.Println(man, gosen, sen)
+	fmt.Println(sum)
 	writer.Flush()
 }

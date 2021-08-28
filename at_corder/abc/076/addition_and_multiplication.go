@@ -1,4 +1,4 @@
-package contest76
+package _76
 
 import (
 	"bufio"
@@ -19,6 +19,7 @@ func getNextLine(scanner *bufio.Reader) string {
 	}
 	return buffer
 }
+
 func getIntList(scanner *bufio.Reader) []int {
 	list := strings.Split(getNextLine(scanner), " ")
 	l := len(list)
@@ -37,10 +38,19 @@ func main() {
 	}
 	scanner := bufio.NewReader(fp)
 	writer := bufio.NewWriter(os.Stdout)
-	var R, G int
-	fmt.Sscan(getNextLine(scanner), &R)
-	fmt.Sscan(getNextLine(scanner), &G)
-	x := G*2 - R
-	fmt.Println(x)
+	var n, k int
+	fmt.Sscan(getNextLine(scanner), &n)
+	fmt.Sscan(getNextLine(scanner), &k)
+	now := 1
+	for i := 0; i < n; i++ {
+		addTmp := now + k
+		mulTmp := now * 2
+		if addTmp <= mulTmp {
+			now += addTmp
+		} else {
+			now += mulTmp
+		}
+	}
+	fmt.Println(now)
 	writer.Flush()
 }

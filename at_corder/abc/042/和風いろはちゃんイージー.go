@@ -1,9 +1,8 @@
-package main
+package _42
 
 import (
 	"bufio"
 	"fmt"
-	"math"
 	"os"
 	"strconv"
 	"strings"
@@ -20,6 +19,7 @@ func getNextLine(scanner *bufio.Reader) string {
 	}
 	return buffer
 }
+
 func getIntList(scanner *bufio.Reader) []int {
 	list := strings.Split(getNextLine(scanner), " ")
 	l := len(list)
@@ -30,34 +30,42 @@ func getIntList(scanner *bufio.Reader) []int {
 	return result
 }
 
+func find(A []int, tcd int) int {
+	I := -1
+	for i, a := range A {
+		if a == tcd {
+			I = i
+		}
+	}
+	return I
+}
+
 func main() {
-	// Your code here!
 	fp := os.Stdin
 	if len(os.Args) > 1 {
 		fp, _ = os.Open(os.Args[1])
 	}
 	scanner := bufio.NewReader(fp)
 	writer := bufio.NewWriter(os.Stdout)
-	var N, K int
-	l := getIntList(scanner)
-	N = l[0]
-	K = l[1]
-	var A, B []int
-	A = getIntList(scanner)
-	B = getIntList(scanner)
-	var diff float64
-	for i := 0; i < N; i++ {
-		diff += math.Abs(float64(A[i]) - float64(B[i]))
-	}
-	if int(diff) > K {
-		fmt.Println("No")
-		return
-	}
 
-	if int(diff)%2 != K%2 {
-		fmt.Println("No")
-		return
+	var T []int
+	T = getIntList(scanner)
+	list := []int{5, 7, 5}
+	l := len(list)
+	count := 0
+	for _, t := range T {
+		result := find(list, t)
+		if result == -1 {
+			break
+		} else {
+			list = append(list[:result], list[result+1:]...)
+			count++
+		}
 	}
-	fmt.Println("Yes")
+	if count == l {
+		fmt.Println("YES")
+	} else {
+		fmt.Println("NO")
+	}
 	writer.Flush()
 }

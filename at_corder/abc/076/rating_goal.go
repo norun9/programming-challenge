@@ -1,10 +1,9 @@
-package main
+package _76
 
 import (
 	"bufio"
 	"fmt"
 	"os"
-	"sort"
 	"strconv"
 	"strings"
 )
@@ -20,7 +19,6 @@ func getNextLine(scanner *bufio.Reader) string {
 	}
 	return buffer
 }
-
 func getIntList(scanner *bufio.Reader) []int {
 	list := strings.Split(getNextLine(scanner), " ")
 	l := len(list)
@@ -31,28 +29,18 @@ func getIntList(scanner *bufio.Reader) []int {
 	return result
 }
 
-func getStrList(scanner *bufio.Reader) []string {
-	list := strings.Split(getNextLine(scanner), "")
-	return list
-}
-
 func main() {
+	// Your code here!
 	fp := os.Stdin
 	if len(os.Args) > 1 {
 		fp, _ = os.Open(os.Args[1])
 	}
 	scanner := bufio.NewReader(fp)
 	writer := bufio.NewWriter(os.Stdout)
-
-	var T []int
-	T = getIntList(scanner)
-	N := T[0]
-	strList := []string{}
-	for i := 0; i < N; i++ {
-		S := getNextLine(scanner)
-		strList = append(strList, S)
-	}
-	sort.Slice(strList, func(i, j int) bool { return strList[i] < strList[j] })
-	fmt.Println(strings.Join(strList, ""))
+	var R, G int
+	fmt.Sscan(getNextLine(scanner), &R)
+	fmt.Sscan(getNextLine(scanner), &G)
+	x := G*2 - R
+	fmt.Println(x)
 	writer.Flush()
 }

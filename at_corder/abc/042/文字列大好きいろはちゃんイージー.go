@@ -1,9 +1,10 @@
-package main
+package _42
 
 import (
 	"bufio"
 	"fmt"
 	"os"
+	"sort"
 	"strconv"
 	"strings"
 )
@@ -30,9 +31,9 @@ func getIntList(scanner *bufio.Reader) []int {
 	return result
 }
 
-type CountNum struct {
-	Str string
-	Num int
+func getStrList(scanner *bufio.Reader) []string {
+	list := strings.Split(getNextLine(scanner), "")
+	return list
 }
 
 func main() {
@@ -43,25 +44,15 @@ func main() {
 	scanner := bufio.NewReader(fp)
 	writer := bufio.NewWriter(os.Stdout)
 
-	var w string
-	fmt.Sscan(getNextLine(scanner), &w)
-	list := strings.Split(w, "")
-	m := map[string]int{}
-	for _, l := range list {
-		_, ok := m[l]
-		if ok {
-			m[l] += 1
-		} else {
-			m[l] = 1
-		}
+	var T []int
+	T = getIntList(scanner)
+	N := T[0]
+	strList := []string{}
+	for i := 0; i < N; i++ {
+		S := getNextLine(scanner)
+		strList = append(strList, S)
 	}
-
-	for _, value := range m {
-		if value%2 != 0 {
-			fmt.Println("No")
-			return
-		}
-	}
-	fmt.Println("Yes")
+	sort.Slice(strList, func(i, j int) bool { return strList[i] < strList[j] })
+	fmt.Println(strings.Join(strList, ""))
 	writer.Flush()
 }
