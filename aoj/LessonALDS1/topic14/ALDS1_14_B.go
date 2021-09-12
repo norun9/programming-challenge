@@ -1,11 +1,13 @@
 package topic14
 
+// # 21 TLE
+
 import (
-"bufio"
-"fmt"
-"os"
-"strconv"
-"strings"
+  "bufio"
+  "fmt"
+  "os"
+  "strconv"
+  "strings"
 )
 
 func getNextLine(scanner *bufio.Reader) string {
@@ -74,7 +76,6 @@ func main() {
 	if !isDupLast {
 		table[lastStr] = len(P)
 	}
-	//fmt.Println(table)
 
 	i, p := len(P)-1, 0
 
@@ -89,6 +90,7 @@ func main() {
 				break
 			}
 		}
+		// patter文字の先頭まで通過できた場合
 		if p < 0 {
 			fmt.Println(i + 1)
 		}
