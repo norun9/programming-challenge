@@ -18,6 +18,7 @@ fn main() {
     let x: Vec<u32> = read_line();
     let _num = x[0];
     let mut vec: Vec<u32> = read_line();
+    // https://runebook.dev/ja/docs/rust/std/cmp/enum.ordering
     vec.sort_by(|x, y| x.cmp(y).reverse());
     let mut alice = 0;
     let mut bob = 0;
